@@ -116,3 +116,64 @@ export default function NotFound() {
   );
 }
 ```
+
+### Metadados da Página
+
+Os metadados da página, como título e descrição, podem ser definidos diretamente no arquivo `page.tsx` de cada página. Isso é feito exportando um objeto `metadata` que contém as informações desejadas.
+
+```tsx
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home | My App',
+  description: 'Welcome to My App built with Next.js',
+};
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className="text-4xl font-bold">Hello, Next.js!</h1>
+    </main>
+  );
+}
+```
+
+Agora nossa página também já possui um titulo e uma descrição personalizada, que são importantes para SEO e para a experiência do usuário.
+![alt text](image.png)
+
+Caso a gente coloque essa informação no layout.tsx, ela será aplicada a todas as páginas da aplicação. Primeiro será verificado se aquela página possui metadados específicos, se não possuir, será utilizado o metadado do layout.tsx.
+
+```tsx
+import { Metadata } from 'next';
+import './globals.css';
+import { Header } from '@/components/header';
+
+export const metadata: Metadata = {
+  title: 'Aula Next.js | My App',
+  description: 'Welcome to My App built with Next.js',
+  openGraph: {
+    title: 'Aula Next.js | My App',
+    description: 'Welcome to My App built with Next.js',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className="antialiased">
+        <Header />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
