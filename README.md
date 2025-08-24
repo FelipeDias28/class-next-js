@@ -95,3 +95,24 @@ export function Header() {
   );
 }
 ```
+
+### Páginas Not Found (404)
+
+Para criar uma página personalizada para erros 404 (página não encontrada), basta criar um arquivo `not-found.tsx` dentro da pasta `app`. Esse arquivo será automaticamente utilizado pelo Next.js quando uma rota não for encontrada.
+
+```tsx
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 className="text-6xl font-bold text-gray-800">404</h1>
+      <p className="text-2xl text-gray-600 mt-4">Página Não Encontrada</p>
+
+      <Link href="/" className="text-blue-600 hover:underline">
+        Voltar para a Home
+      </Link>
+    </div>
+  );
+}
+```
